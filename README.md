@@ -24,4 +24,15 @@ npm run dev
  - Mutation
  - Subscription
 
+
+JSON 
+{
+    "query": "{ hello }"
+}
+YAML
+
+helloquery: 
+
+
+
  

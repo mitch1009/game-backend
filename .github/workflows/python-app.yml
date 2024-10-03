@@ -46,6 +46,10 @@ jobs:
         registry: ghcr.io
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
+    - name: build flask app
+      working-directory: ./apps/python-api
+      run: |
+        docker build -t ghcr.io/mitch1009/backend/python-api:latest .
     - name: push docker image
       run: |
         docker push ghcr.io/mitch1009/backend/python-api:latest

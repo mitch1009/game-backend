@@ -9,36 +9,36 @@ permissions:
   contents: read
 
 jobs:
-  test:
-    runs-on: macos-latest
-    steps:
-    - uses: actions/checkout@v4
-    - name: Set up Python 3.10
-      uses: actions/setup-python@v3
-      with:
-        python-version: "3.10"
-        
   build:
-    needs: test 
+    runs-on: macos-latest
+    name: Build Python API
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4.2.0
+    - name: Set up Python 3.12
+      uses: actions/setup-python@v5.2.0
+      with:
+        python-version: "3.12"
+    - name: build flask app
+      working-directory: ./apps/python-api
+      run: |
+        docker build -t python-api:latest .
+    # - name : Docker trigger
+    #   uses: mitch1009/docker-trigger@main
+    #   with:
+    #     git_token: ${{ secrets.GITHUB_TOKEN }}
+    #     release_name: python-api
+    #     release_version: latest
+    #     docker_image_vendor: docker.io
+    #     docker_context_path: ./apps/python-api
+  deploy:
+    needs: build 
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v4
     - name: Set up Python 3.10
       uses: actions/setup-python@v3
       with:
-        python-version: "3.10"
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install flake8 pytest
-        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-    - name: Lint with flake8
-      run: |
-        # stop the build if there are Python syntax errors or undefined names
-        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
-        # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
-        flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
-    - name: Test with pytest
-      run: |
-        pytest
+        python-version: "3.12"
+    
+  

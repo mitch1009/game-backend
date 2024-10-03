@@ -1,0 +1,13 @@
+.env/  
+node_modules
+__pycache__
+.DS_Store
+*.log
+*.out
+*.pid
+*.pid.lock
+*.sock
+*.sock.lock
+*.sock.lock.lock
+*.sock.lock.lock.lock
+*.sock.lock.lock.lock.lock

@@ -49,9 +49,9 @@ jobs:
     - name: build flask app
       working-directory: ./apps/python-api
       run: |
-        docker build -t ghcr.io/mitch1009/game-backend/python-api:latest .
+        docker build -t ghcr.io/mitch1009/python-api:latest .
     - name: push docker image
       run: |
-        docker push ghcr.io/mitch1009/game-backend/python-api:latest
+        docker push ghcr.io/mitch1009/python-api:latest
     
   

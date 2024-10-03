@@ -30,14 +30,7 @@ jobs:
       working-directory: ./apps/python-api
       run: |
         docker build -t ghcr.io/mitch1009/backend/python-api:latest .
-    # - name : Docker trigger
-    #   uses: mitch1009/docker-trigger@main
-    #   with:
-    #     git_token: ${{ secrets.GITHUB_TOKEN }}
-    #     release_name: python-api
-    #     release_version: latest
-    #     docker_image_vendor: docker.io
-    #     docker_context_path: ./apps/python-api
+   
   deploy:
     needs: build 
     runs-on: ubuntu-latest
